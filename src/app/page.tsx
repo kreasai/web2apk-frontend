@@ -216,6 +216,7 @@ export default function Home() {
                   "Signed APK dengan keystore Anda untuk update Play Store",
                   "Fallback offline dan loading state terkontrol",
                   "Riwayat build untuk tracking rilis tim",
+                  "Terintegrasi MAYAR.ID untuk alur pembayaran kredit yang lebih praktis",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-3">
                     <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-900/50">
@@ -478,7 +479,10 @@ export default function Home() {
             <ApekaLogo size={18} />
             <span className="font-brand font-bold text-white">Apeka.dev</span>
           </div>
-          <div className="text-sm text-slate-400">© {new Date().getFullYear()} Apeka.dev. Hak cipta dilindungi.</div>
+          <div className="text-center text-sm text-slate-400 md:text-left">
+            <p>© {new Date().getFullYear()} Apeka.dev. Hak cipta dilindungi.</p>
+            <p className="mt-1 text-xs text-emerald-300/90">Credit: Terintegrasi dengan MAYAR.ID</p>
+          </div>
           <div className="flex gap-6 text-sm text-slate-400">
             <a href="/terms" className="font-brand transition-colors hover:text-white">Syarat</a>
             <a href="/privacy" className="font-brand transition-colors hover:text-white">Privasi</a>
