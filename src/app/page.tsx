@@ -1,60 +1,74 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import { ApekaLogo } from "@/components/brand/ApekaLogo";
+import {
+  Check,
+  CheckCircle2,
+  Gem,
+  Layers3,
+  Rocket,
+  ShieldCheck,
+  Sparkles,
+  Workflow,
+} from "lucide-react";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const appBaseUrl = "https://dash.apeka.dev";
+  const containerClass = "mx-auto w-full max-w-[1100px] px-5 sm:px-6";
+  const navItems = [
+    { href: "#fitur", label: "Fitur" },
+    { href: "#alur", label: "Alur" },
+    { href: "#harga", label: "Harga" },
+    { href: "#faq", label: "FAQ" },
+  ];
 
   useEffect(() => {
     if (!isMenuOpen) return;
     const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prev;
     };
   }, [isMenuOpen]);
 
   return (
-    <div className="min-h-screen bg-[#f7faf7] text-slate-900 font-sans selection:bg-emerald-200 selection:text-emerald-950">
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-white/80 backdrop-blur-md border-b border-emerald-100">
-        <div className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-xl bg-emerald-600/10 border border-emerald-200 flex items-center justify-center" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Apeka logo">
-              <title>Apeka logo</title>
-              <path d="M4 14.5C6.2 7.5 11 4 18.5 4" stroke="#059669" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M5 19.5C7.5 14.8 12 12 19 12" stroke="#0f766e" strokeWidth="2" strokeLinecap="round"/>
-              <circle cx="8" cy="9" r="2" fill="#10b981"/>
-            </svg>
+    <div className="min-h-screen overflow-x-hidden bg-slate-950 text-slate-100 font-sans selection:bg-emerald-400/30 selection:text-emerald-50">
+      <nav className="sticky top-0 z-50 border-b border-emerald-900/40 bg-slate-950/85 backdrop-blur-md">
+        <div className={`${containerClass} flex items-center justify-between py-4`}>
+          <div className="flex items-center gap-2.5">
+            <ApekaLogo size={26} />
+            <p className="font-brand text-[1.6rem] font-bold leading-none text-white">Apeka.dev</p>
           </div>
-          <div>
-            <p className="text-lg font-bold tracking-tight leading-none">Apeka.dev</p>
-            <p className="text-[11px] uppercase tracking-[0.2em] text-emerald-700">Site to APK</p>
+          <div className="hidden items-center gap-7 text-sm font-medium text-slate-300 md:flex">
+            {navItems.map((item) => (
+              <a key={item.href} href={item.href} className="font-brand transition-colors hover:text-emerald-300">
+                {item.label}
+              </a>
+            ))}
           </div>
-        </div>
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-          <a href="#features" className="hover:text-slate-900 transition-colors">Features</a>
-          <a href="#workflow" className="hover:text-slate-900 transition-colors">Workflow</a>
-          <a href="#showcase" className="hover:text-slate-900 transition-colors">Showcase</a>
-          <a href="#pricing" className="hover:text-slate-900 transition-colors">Pricing</a>
-          <a href="#faq" className="hover:text-slate-900 transition-colors">FAQ</a>
-        </div>
-        <div className="flex items-center gap-3">
-          <a href="https://app.domain.com/login" className="text-sm font-medium text-slate-600 hover:text-slate-900 hidden sm:block">
-            Log in
-          </a>
-          <a href="https://app.domain.com/register" className="bg-emerald-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-sm shadow-emerald-200/70">
-            Register
-          </a>
-          <button
-            type="button"
-            className="inline-flex items-center justify-center rounded-lg border border-emerald-200 p-2 text-slate-700 md:hidden"
-            aria-label="Open menu"
-            onClick={() => setIsMenuOpen(true)}
-          >
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-3">
+            <a href={`${appBaseUrl}/login`} className="hidden text-sm font-medium text-slate-300 transition-colors hover:text-white sm:block">
+              Masuk
+            </a>
+            <a
+              href={`${appBaseUrl}/register`}
+              className="rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-emerald-900/60 transition-colors hover:bg-emerald-500"
+            >
+              Daftar
+            </a>
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-lg border border-emerald-800/60 p-2 text-slate-200 md:hidden"
+              aria-label="Buka menu"
+              onClick={() => setIsMenuOpen(true)}
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -62,17 +76,17 @@ export default function Home() {
         <div className="fixed inset-0 z-[60] md:hidden">
           <button
             type="button"
-            aria-label="Close menu overlay"
-            className="absolute inset-0 bg-emerald-900/25"
+            aria-label="Tutup overlay menu"
+            className="absolute inset-0 bg-slate-950/70 transition-opacity duration-300"
             onClick={() => setIsMenuOpen(false)}
           />
-          <aside className="absolute right-0 top-0 h-full w-80 max-w-[86vw] bg-white shadow-2xl">
-            <div className="flex items-center justify-between border-b border-emerald-100 px-5 py-4">
-              <p className="text-sm font-semibold tracking-tight text-slate-900">Menu</p>
+          <aside className="absolute right-0 top-0 h-full w-[86vw] max-w-80 animate-[slideIn_.28s_ease-out] border-l border-emerald-900/40 bg-slate-900 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-emerald-900/40 px-5 py-4">
+              <p className="font-brand text-sm font-semibold text-white">Apeka.dev</p>
               <button
                 type="button"
-                aria-label="Close menu"
-                className="rounded-lg border border-emerald-200 p-2 text-slate-700"
+                aria-label="Tutup menu"
+                className="rounded-lg border border-emerald-800/60 p-2 text-slate-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -81,37 +95,31 @@ export default function Home() {
               </button>
             </div>
             <div className="space-y-2 px-5 py-5">
-              {[
-                { href: '#features', label: 'Features' },
-                { href: '#workflow', label: 'Workflow' },
-                { href: '#showcase', label: 'Showcase' },
-                { href: '#pricing', label: 'Pricing' },
-                { href: '#faq', label: 'FAQ' },
-              ].map((item) => (
+              {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
-                  className="block rounded-xl px-3 py-3 text-sm font-medium text-slate-700 hover:bg-emerald-50"
+                  className="block rounded-xl px-3 py-3 font-brand text-sm font-medium text-slate-200 hover:bg-emerald-900/30"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
                 </a>
               ))}
             </div>
-            <div className="mt-3 space-y-3 border-t border-emerald-100 px-5 py-5">
+            <div className="mt-3 space-y-3 border-t border-emerald-900/40 px-5 py-5">
               <a
-                href="https://app.domain.com/login"
-                className="block rounded-xl border border-emerald-200 px-4 py-3 text-center text-sm font-medium text-slate-700"
+                href={`${appBaseUrl}/login`}
+                className="block rounded-xl border border-emerald-800/60 px-4 py-3 text-center text-sm font-medium text-slate-200"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Log in
+                Masuk
               </a>
               <a
-                href="https://app.domain.com/register"
+                href={`${appBaseUrl}/register`}
                 className="block rounded-xl bg-emerald-600 px-4 py-3 text-center text-sm font-semibold text-white"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Register
+                Daftar
               </a>
             </div>
           </aside>
@@ -119,435 +127,344 @@ export default function Home() {
       ) : null}
 
       <main>
-        <section className="relative pt-24 pb-28 px-6 overflow-hidden">
-          <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-emerald-200/40 blur-3xl" aria-hidden="true"></div>
-          <div className="absolute -bottom-32 left-0 h-96 w-96 rounded-full bg-lime-200/30 blur-3xl" aria-hidden="true"></div>
-          <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl h-48 border border-emerald-100/80 rounded-[48px]" aria-hidden="true"></div>
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-sm font-semibold mb-6 border border-emerald-100">
-                <span className="flex h-2 w-2 rounded-full bg-emerald-500"></span>
-                Launch-ready Android apps from your site
+        <section className="py-14 sm:py-16">
+          <div className={containerClass}>
+            <div className="max-w-3xl">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-800/70 bg-emerald-900/30 px-3 py-1 text-xs font-semibold text-emerald-200">
+                <span className="flex h-2 w-2 rounded-full bg-emerald-400" />
+                Alur APK siap submission
               </div>
-              <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-[1.08]">
-                Apeka.dev converts your website into a
-                <span className="text-emerald-700"> polished Android APK</span> in minutes.
+              <h1 className="mb-5 text-[2rem] font-extrabold leading-[1.1] tracking-tight text-white sm:text-[2.35rem] md:text-[2.8rem]">
+                Ubah website Anda menjadi
+                <span className="text-emerald-300"> aplikasi Android siap rilis</span> tanpa membangun ulang produk.
               </h1>
-              <p className="text-lg text-slate-600 mb-8 max-w-xl leading-relaxed">
-                Skip weeks of native development. Paste your URL, upload your branding, and ship an app with offline support, push-ready hooks, and Play Store compliance.
+              <p className="mb-7 max-w-2xl text-base leading-relaxed text-slate-300">
+                Apeka.dev membantu tim mengemas web app menjadi APK Android production-ready dengan branding, signing, dan proses build yang rapi.
               </p>
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <a href="https://app.domain.com/register" className="w-full sm:w-auto bg-emerald-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-emerald-700 transition-all shadow-[0_14px_40px_rgba(16,185,129,0.28)] flex items-center justify-center gap-2">
-                  Register
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+              <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+                <a
+                  href={`${appBaseUrl}/register`}
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-emerald-600 px-7 py-3 text-base font-semibold text-white shadow-[0_14px_36px_rgba(16,185,129,0.25)] transition-all hover:bg-emerald-500 sm:w-auto"
+                >
+                  Daftar Sekarang
                 </a>
-                <a href="https://app.domain.com/login" className="w-full sm:w-auto px-6 py-3 rounded-full border border-emerald-200 text-emerald-900 font-semibold hover:bg-emerald-50 transition-colors text-center">
-                  Log in
+                <a
+                  href={`${appBaseUrl}/login`}
+                  className="w-full rounded-full border border-emerald-700/70 px-6 py-3 text-center text-sm font-semibold text-emerald-100 transition-colors hover:bg-emerald-900/30 sm:w-auto"
+                >
+                  Masuk Dashboard
                 </a>
               </div>
-              <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-slate-500">
+              <div className="mt-7 flex flex-wrap items-center gap-5 text-xs text-slate-400 sm:text-sm">
                 <span className="inline-flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-                  No credit card required
+                  <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                  Source of truth tetap di web app Anda
                 </span>
                 <span className="inline-flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-                  60s average build time
+                  <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                  Build berulang dengan output konsisten
                 </span>
-              </div>
-            </div>
-            <div className="relative">
-              <div className="absolute inset-0 rounded-[32px] border border-emerald-100/70 bg-white/70 backdrop-blur-sm"></div>
-              <div className="relative rounded-[32px] border border-emerald-100 bg-white shadow-[0_30px_80px_rgba(15,118,110,0.12)] p-8">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <p className="text-sm font-semibold text-slate-900">Apeka Build Canvas</p>
-                    <p className="text-xs text-emerald-700">Live preview · Android 14</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="h-3 w-3 rounded-full bg-emerald-500"></span>
-                    <span className="h-3 w-3 rounded-full bg-emerald-200"></span>
-                  </div>
-                </div>
-                <div className="grid gap-4">
-                  <div className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-4">
-                    <p className="text-xs font-semibold text-emerald-800">Website source</p>
-                    <p className="text-sm text-slate-700 mt-1">https://yourdomain.com</p>
-                  </div>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="rounded-2xl border border-emerald-100 bg-white p-4">
-                      <p className="text-xs font-semibold text-slate-600">Brand kit</p>
-                      <div className="mt-3 flex items-center gap-3">
-                        <div className="h-10 w-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
-                          <span className="text-emerald-700 font-semibold">A</span>
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold text-slate-900">Icon + splash</p>
-                          <p className="text-xs text-slate-500">Uploaded</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-2xl border border-emerald-100 bg-white p-4">
-                      <p className="text-xs font-semibold text-slate-600">Build status</p>
-                      <div className="mt-3">
-                        <div className="h-2 w-full rounded-full bg-emerald-100">
-                          <div className="h-2 w-3/4 rounded-full bg-emerald-500"></div>
-                        </div>
-                        <p className="text-xs text-emerald-700 mt-2">Packaging assets · 75%</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-2xl border border-emerald-100 bg-white p-4 flex items-center justify-between">
-                    <div>
-                      <p className="text-xs font-semibold text-slate-600">APK output</p>
-                      <p className="text-sm font-semibold text-slate-900 mt-1">apeka-yourdomain-v1.apk</p>
-                    </div>
-                    <div className="h-10 w-10 rounded-full bg-emerald-600 text-white flex items-center justify-center">
-                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v14m7-7H5"></path></svg>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="px-6 pb-20">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+        <section className="pb-16">
+          <div className={`${containerClass} grid gap-4 md:grid-cols-3`}>
             {[
               {
-                title: "250+ teams",
-                desc: "Builders, agencies, and founders shipping mobile in days, not months.",
+                title: "Onboarding cepat",
+                desc: "Mulai dari URL dan aset brand dalam satu alur yang jelas.",
+                icon: Rocket,
               },
               {
-                title: "99.9%",
-                desc: "Build pipeline uptime across signing, packaging, and delivery.",
+                title: "Output konsisten",
+                desc: "Generate APK berulang setiap ada update pada website.",
+                icon: Workflow,
               },
               {
-                title: "60s",
-                desc: "Average APK generation time with queued assets.",
+                title: "Siap kolaborasi",
+                desc: "Bagikan hasil build ke QA dan stakeholder lebih cepat.",
+                icon: ShieldCheck,
               },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-emerald-100 bg-white/70 p-6 shadow-sm">
-                <p className="text-2xl font-bold text-slate-900">{item.title}</p>
-                <p className="text-sm text-slate-600 mt-2">{item.desc}</p>
+              <div key={item.title} className="relative overflow-hidden rounded-2xl border border-emerald-900/40 bg-slate-900/60 p-5 shadow-sm">
+                <svg className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 text-emerald-950" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+                  <circle cx="60" cy="60" r="54" stroke="currentColor" strokeWidth="8" />
+                </svg>
+                <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-900/50 text-emerald-300">
+                  <item.icon className="h-4.5 w-4.5" aria-hidden="true" />
+                </div>
+                <p className="text-xl font-semibold text-white">{item.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section id="features" className="py-24 px-6 bg-white/70">
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-12 items-center">
+        <section id="fitur" className="bg-slate-900/50 py-20">
+          <div className={`${containerClass} grid items-center gap-10 lg:grid-cols-2`}>
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">Core features</p>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mt-4">A full mobile release kit, already wired.</h2>
-              <p className="text-lg text-slate-600 mt-5 leading-relaxed">
-                Apeka.dev handles the Android scaffolding so you can focus on content and growth. Each build includes the essentials teams need to ship confidently.
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">Fitur utama</p>
+              <h2 className="mt-4 text-2xl font-bold tracking-tight text-white md:text-3xl">Perlengkapan rilis Android yang sudah siap pakai.</h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-300">
+                Apeka.dev menangani proses packaging dan release supaya tim Anda tetap fokus mengembangkan produk inti.
               </p>
-              <div className="mt-8 space-y-4">
+              <div className="mt-7 space-y-3">
                 {[
-                  "Custom app icon, splash screen, and brand colors",
-                  "Signed APK with your keystore for Play Store updates",
-                  "Offline fallbacks, pull-to-refresh, and native loading",
-                  "Ready hooks for analytics and push providers",
+                  "Kustom ikon aplikasi, splash screen, dan warna brand",
+                  "Signed APK dengan keystore Anda untuk update Play Store",
+                  "Fallback offline dan loading state terkontrol",
+                  "Riwayat build untuk tracking rilis tim",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-3">
-                    <div className="mt-1 h-6 w-6 rounded-full bg-emerald-100 flex items-center justify-center">
-                      <svg className="h-4 w-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                    <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-900/50">
+                      <Check className="h-3.5 w-3.5 text-emerald-300" aria-hidden="true" />
                     </div>
-                    <p className="text-slate-700">{item}</p>
+                    <p className="text-sm leading-relaxed text-slate-200">{item}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="grid gap-6">
-              <div className="rounded-3xl border border-emerald-100 bg-emerald-50/70 p-6 shadow-sm">
+            <div className="grid gap-5">
+              <div className="rounded-3xl border border-emerald-900/40 bg-slate-900/60 p-5 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-semibold text-slate-900">Brand controls</h3>
-                  <span className="text-xs font-semibold text-emerald-700 bg-white px-3 py-1 rounded-full border border-emerald-100">Drag & drop</span>
+                  <h3 className="text-lg font-semibold text-white">Kontrol branding</h3>
+                  <span className="rounded-full border border-emerald-800/70 bg-emerald-900/30 px-2.5 py-1 text-[11px] font-semibold text-emerald-200">Unggah cepat</span>
                 </div>
-                <p className="text-sm text-slate-600 mt-3">Upload assets once. Apeka applies them across splash, launcher, and loading states.</p>
-                <div className="mt-5 flex items-center gap-4">
-                  <div className="h-16 w-16 rounded-2xl bg-white border border-emerald-100 flex items-center justify-center text-emerald-700 font-bold">A</div>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">Upload aset sekali, lalu Apeka menerapkan secara konsisten di launcher, splash, dan loading state.</p>
+                <div className="mt-4 flex items-center gap-3.5">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-900/40 bg-slate-950 text-emerald-300 font-bold">A</div>
                   <div>
-                    <p className="text-sm font-semibold">Color palette</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">Palet warna</p>
                     <div className="mt-2 flex gap-2">
-                      <span className="h-4 w-4 rounded-full bg-emerald-600"></span>
-                      <span className="h-4 w-4 rounded-full bg-emerald-300"></span>
-                      <span className="h-4 w-4 rounded-full bg-emerald-100"></span>
+                      <span className="h-4 w-4 rounded-full bg-emerald-500" />
+                      <span className="h-4 w-4 rounded-full bg-emerald-400" />
+                      <span className="h-4 w-4 rounded-full bg-emerald-300" />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div className="rounded-3xl border border-emerald-100 bg-white p-6 shadow-sm">
-                  <h3 className="text-lg font-semibold text-slate-900">Release pipeline</h3>
-                  <p className="text-sm text-slate-600 mt-3">Queue builds, track progress, and download releases with full audit logs.</p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-emerald-900/40 bg-slate-900/60 p-5 shadow-sm">
+                  <h3 className="text-base font-semibold text-white">Alur rilis</h3>
+                  <p className="mt-2 text-sm text-slate-300">Queue build, cek progres, lalu unduh output dari satu dashboard.</p>
                 </div>
-                <div className="rounded-3xl border border-emerald-100 bg-white p-6 shadow-sm">
-                  <h3 className="text-lg font-semibold text-slate-900">Security ready</h3>
-                  <p className="text-sm text-slate-600 mt-3">Your keystore stays yours, and builds are encrypted at rest.</p>
+                <div className="rounded-2xl border border-emerald-900/40 bg-slate-900/60 p-5 shadow-sm">
+                  <h3 className="text-base font-semibold text-white">Fokus submission</h3>
+                  <p className="mt-2 text-sm text-slate-300">Dirancang untuk iterasi QA cepat sebelum publish ke Play Store.</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="workflow" className="py-24 px-6">
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-start">
-            <div className="rounded-[32px] border border-emerald-100 bg-white p-8 shadow-sm relative overflow-hidden">
-              <div className="absolute -top-20 -right-10 h-48 w-48 rounded-full bg-emerald-100/60" aria-hidden="true"></div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">Workflow</p>
-              <h2 className="text-3xl font-bold tracking-tight mt-4">From URL to Android in three guided steps.</h2>
-              <p className="text-slate-600 mt-5">Apeka keeps the pipeline simple with milestones you can track and share.</p>
-              <div className="mt-8 space-y-6">
+        <section id="alur" className="py-20">
+          <div className={`${containerClass} grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr]`}>
+            <div className="rounded-[28px] border border-emerald-900/40 bg-slate-900/60 p-6 shadow-sm">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">Alur kerja</p>
+              <h2 className="mt-4 text-2xl font-bold tracking-tight text-white">Dari URL ke APK Android dalam tiga langkah.</h2>
+              <p className="mt-4 text-sm leading-relaxed text-slate-300">Apeka menjaga proses tetap sederhana dengan milestone yang mudah dipantau.</p>
+              <div className="mt-6 space-y-5">
                 {[
                   {
                     step: "01",
-                    title: "Connect your website",
-                    desc: "Paste the live URL and verify the app shell with our visual inspector.",
+                    title: "Hubungkan website",
+                    desc: "Masukkan URL produksi dan cek preview app shell.",
                   },
                   {
                     step: "02",
-                    title: "Brand and configure",
-                    desc: "Upload assets, choose orientation, set offline rules, and connect analytics.",
+                    title: "Atur branding",
+                    desc: "Unggah ikon dan splash, lalu sesuaikan konfigurasi brand.",
                   },
                   {
                     step: "03",
-                    title: "Build and ship",
-                    desc: "Generate a signed APK and push directly to Google Play or distribute privately.",
+                    title: "Build dan distribusi",
+                    desc: "Generate signed APK untuk QA dan persiapan submission.",
                   },
                 ].map((item) => (
                   <div key={item.step} className="flex gap-4">
-                    <div className="text-emerald-700 font-semibold">{item.step}</div>
+                    <div className="font-semibold text-emerald-300">{item.step}</div>
                     <div>
-                      <p className="font-semibold text-slate-900">{item.title}</p>
-                      <p className="text-sm text-slate-600 mt-2">{item.desc}</p>
+                      <p className="font-semibold text-white">{item.title}</p>
+                      <p className="mt-1.5 text-sm text-slate-300">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="grid gap-6">
-              <div className="rounded-[32px] border border-emerald-100 bg-white p-8 shadow-sm">
+            <div className="grid gap-5">
+              <div className="rounded-[28px] border border-emerald-900/40 bg-slate-900/60 p-6 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-semibold text-slate-600">Live build tracker</p>
-                  <span className="text-xs font-semibold text-emerald-700">Queue #12</span>
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">Pelacak build langsung</p>
+                  <span className="text-xs font-semibold text-emerald-300">Queue #12</span>
                 </div>
-                <div className="mt-6 space-y-4">
+                <div className="mt-5 space-y-3.5">
                   {[
-                    { label: "Assets verified", value: "Done" },
-                    { label: "App shell compiled", value: "Running" },
-                    { label: "APK signed", value: "Queued" },
+                    { label: "Verifikasi aset", value: "Selesai" },
+                    { label: "Kompilasi app shell", value: "Berjalan" },
+                    { label: "Signing APK", value: "Antrian" },
                   ].map((item) => (
                     <div key={item.label} className="flex items-center justify-between text-sm">
-                      <span className="text-slate-600">{item.label}</span>
-                      <span className="font-semibold text-slate-900">{item.value}</span>
+                      <span className="text-slate-300">{item.label}</span>
+                      <span className="font-semibold text-white">{item.value}</span>
                     </div>
                   ))}
-                  <div className="h-2 w-full rounded-full bg-emerald-100">
-                    <div className="h-2 w-2/3 rounded-full bg-emerald-500"></div>
+                  <div className="h-2 w-full rounded-full bg-emerald-900/50">
+                    <div className="h-2 w-2/3 rounded-full bg-emerald-400" />
                   </div>
                 </div>
               </div>
-              <div className="rounded-[32px] border border-emerald-100 bg-emerald-900 text-white p-8 shadow-sm relative overflow-hidden">
-                <div className="absolute -bottom-20 -left-12 h-48 w-48 rounded-full bg-emerald-500/20" aria-hidden="true"></div>
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-200">Delivery</p>
-                <h3 className="text-2xl font-semibold mt-4">Share builds instantly with your team.</h3>
-                <p className="text-sm text-emerald-100/80 mt-3">One link for QA, stakeholders, and release managers.</p>
-                <div className="mt-6 flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-emerald-500 flex items-center justify-center">
-                    <svg className="h-5 w-5" fill="none" stroke="white" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
+              <div className="rounded-[28px] border border-emerald-800/60 bg-emerald-900/50 p-6 text-white shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200">Kolaborasi</p>
+                <h3 className="mt-3 text-xl font-semibold">Bagikan build QA ke tim secara instan.</h3>
+                <p className="mt-2 text-sm text-emerald-100/90">Gunakan satu tautan distribusi untuk QA, review produk, dan pengecekan rilis.</p>
+                <div className="mt-5 flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500 text-emerald-950">
+                    <Sparkles className="h-4 w-4" aria-hidden="true" />
                   </div>
-                  <p className="text-sm">apeka.dev/build/your-app</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="showcase" className="py-24 px-6 bg-white/70 border-y border-emerald-100">
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-12 items-center">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">Showcase</p>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mt-4">Deliver a native feel without rewriting your stack.</h2>
-              <p className="text-lg text-slate-600 mt-5">WebView performance, native navigation, and trusted Android UX patterns—wrapped in a sleek UI shell.</p>
-              <div className="mt-8 space-y-4">
-                {[
-                  "No browser chrome or address bar",
-                  "Adaptive loading screens with your brand",
-                  "Offline messaging and retry states",
-                  "Deep link support for campaigns",
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-full border border-emerald-200 bg-emerald-50 flex items-center justify-center">
-                      <svg className="h-4 w-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    </div>
-                    <span className="text-slate-700">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative flex justify-center">
-              <div className="absolute -inset-10 bg-emerald-100/50 rounded-[48px] blur-2xl" aria-hidden="true"></div>
-              <div className="relative rounded-[36px] border border-emerald-100 bg-white shadow-[0_30px_70px_rgba(15,118,110,0.18)] p-6 w-full max-w-md">
-                <div className="flex items-center justify-between mb-5">
-                  <div>
-                    <p className="text-sm font-semibold text-slate-900">Apeka Mobile Preview</p>
-                        <p className="text-xs text-emerald-700">Frame · 6.7&quot; display</p>
-                  </div>
-                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">Live</span>
-                </div>
-                <div className="rounded-[28px] border border-emerald-200 overflow-hidden">
-                  <div className="bg-emerald-700 text-white px-5 py-4">
-                    <p className="text-sm font-semibold">Your App</p>
-                    <p className="text-xs text-emerald-100">Home · Offers</p>
-                  </div>
-                  <div className="p-5 space-y-4 bg-emerald-50/50">
-                    <div className="rounded-2xl bg-white border border-emerald-100 p-4">
-                      <p className="text-xs text-emerald-700 font-semibold">Featured</p>
-                      <p className="text-sm font-semibold text-slate-900 mt-2">Spring campaign landing</p>
-                      <div className="mt-4 h-2 w-full rounded-full bg-emerald-100">
-                        <div className="h-2 w-2/3 rounded-full bg-emerald-500"></div>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="rounded-2xl bg-white border border-emerald-100 p-4">
-                        <p className="text-xs text-slate-500">Orders</p>
-                        <p className="text-lg font-semibold text-slate-900 mt-2">1,204</p>
-                      </div>
-                      <div className="rounded-2xl bg-white border border-emerald-100 p-4">
-                        <p className="text-xs text-slate-500">Avg. load</p>
-                        <p className="text-lg font-semibold text-slate-900 mt-2">1.1s</p>
-                      </div>
-                    </div>
-                    <div className="rounded-2xl bg-white border border-emerald-100 p-4">
-                      <p className="text-xs text-slate-500">Quick actions</p>
-                      <div className="mt-3 flex gap-2">
-                        <span className="px-3 py-1 rounded-full text-xs font-semibold text-emerald-700 bg-emerald-100">Share</span>
-                        <span className="px-3 py-1 rounded-full text-xs font-semibold text-emerald-700 bg-emerald-100">Refresh</span>
-                      </div>
-                    </div>
-                  </div>
+                  <p className="text-sm text-emerald-100">dash.apeka.dev/history/your-build</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="pricing" className="py-24 px-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+        <section id="harga" className="py-20">
+          <div className={containerClass}>
+            <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">Pricing</p>
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tight mt-4">Credits that scale with your release cadence.</h2>
-                <p className="text-lg text-slate-600 mt-4 max-w-2xl">Buy only what you need. Each credit equals a full APK build with signing included.</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">Harga</p>
+                <h2 className="mt-4 text-2xl font-bold tracking-tight text-white md:text-3xl">Harga transparan berbasis kredit.</h2>
+                <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-300">1 generate = 1.000 kredit. Mulai dari Rp10.000 untuk 1.000 kredit, dengan paket 2.000 kredit untuk signed APK + AAB.</p>
               </div>
-              <a href="https://app.domain.com/register" className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-emerald-600 text-white font-semibold hover:bg-emerald-700">Register</a>
+              <a href={`${appBaseUrl}/register`} className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white hover:bg-emerald-500">
+                Daftar
+              </a>
             </div>
-            <div className="mt-12 grid lg:grid-cols-[1.05fr_0.95fr] gap-8">
-              <div className="rounded-[32px] border border-emerald-100 bg-white p-8 shadow-sm">
-                <div className="flex items-center justify-between">
+            <div className="mt-10 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="relative overflow-hidden rounded-[28px] border border-emerald-900/40 bg-slate-900/60 p-6 shadow-sm">
+                <svg className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 text-emerald-950" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+                  <path d="M20 20H100V100H20V20Z" stroke="currentColor" strokeWidth="10" />
+                </svg>
+                <div className="flex items-center justify-between gap-4">
                   <div>
-                    <p className="text-sm font-semibold text-slate-600">Single build</p>
-                    <p className="text-3xl font-bold text-slate-900 mt-2">$9 <span className="text-base font-medium text-slate-500">/ credit</span></p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">Kredit starter</p>
+                    <p className="mt-2 text-2xl font-bold text-white">Rp10.000 <span className="text-sm font-medium text-slate-400">/ 1.000 kredit</span></p>
                   </div>
-                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">Starter</span>
+                  <span className="rounded-full border border-emerald-800/70 bg-emerald-900/30 px-3 py-1 text-[11px] font-semibold text-emerald-200">Starter</span>
                 </div>
-                <ul className="mt-6 space-y-3 text-sm text-slate-700">
+                <ul className="mt-5 space-y-2.5 text-sm text-slate-200">
                   {[
-                    "One APK build",
-                    "Custom keystore delivery",
-                    "Basic analytics hooks",
-                    "Email support",
+                    "1x generate = 1.000 kredit",
+                    "Tarif: Rp10.000 per generate",
+                    "Dukungan custom keystore",
+                    "Tracking progres build",
+                    "Dukungan via email",
                   ].map((item) => (
                     <li key={item} className="flex items-center gap-2">
-                      <svg className="h-4 w-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                      <CheckCircle2 className="h-4 w-4 text-emerald-300" aria-hidden="true" />
                       {item}
                     </li>
                   ))}
                 </ul>
-                <a href="https://app.domain.com/register" className="mt-8 inline-flex w-full items-center justify-center rounded-full border border-emerald-200 px-4 py-3 text-sm font-semibold text-emerald-900 hover:bg-emerald-50">
-                  Start with one build
+                <a href={`${appBaseUrl}/register`} className="mt-6 inline-flex w-full items-center justify-center rounded-full border border-emerald-800/70 px-4 py-3 text-sm font-semibold text-emerald-100 hover:bg-emerald-900/30">
+                  Mulai 1x generate
                 </a>
               </div>
-              <div className="rounded-[32px] border border-emerald-200 bg-emerald-900 text-white p-8 shadow-sm relative overflow-hidden">
-                <div className="absolute -top-20 right-0 h-48 w-48 rounded-full bg-emerald-500/30" aria-hidden="true"></div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200">Most chosen</p>
-                <p className="text-3xl font-bold mt-4">$29 <span className="text-base font-medium text-emerald-100">/ 5 credits</span></p>
-                <p className="text-sm text-emerald-100/80 mt-4">Ideal for agencies, updates, and QA teams.</p>
-                <ul className="mt-6 space-y-3 text-sm text-emerald-50">
+              <div className="relative overflow-hidden rounded-[28px] border border-emerald-700/70 bg-emerald-900/45 p-6 text-white shadow-sm">
+                <svg className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 text-emerald-600/35" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+                  <path d="M60 10L105 88H15L60 10Z" fill="currentColor" />
+                </svg>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-emerald-200">Paling dipilih</p>
+                <p className="mt-3 text-2xl font-bold">Rp20.000 <span className="text-sm font-medium text-emerald-100">/ 2.000 kredit</span></p>
+                <p className="mt-3 text-sm text-emerald-100/90">Paket untuk tim yang membutuhkan signed APK dan AAB dalam satu alur.</p>
+                <ul className="mt-5 space-y-2.5 text-sm text-emerald-50">
                   {[
-                    "Five APK builds",
-                    "Priority build queue",
-                    "Release notes export",
-                    "Priority support",
+                    "Signed APK + AAB package = 2.000 kredit",
+                    "Harga paket setara: Rp20.000",
+                    "Prioritas antrian build",
+                    "Riwayat build untuk review tim",
+                    "Dukungan prioritas",
                   ].map((item) => (
                     <li key={item} className="flex items-center gap-2">
-                      <svg className="h-4 w-4 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                      <Gem className="h-4 w-4 text-emerald-200" aria-hidden="true" />
                       {item}
                     </li>
                   ))}
                 </ul>
-                <a href="https://app.domain.com/register" className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-white text-emerald-900 px-4 py-3 text-sm font-semibold hover:bg-emerald-50">
-                  Choose Pro Pack
+                <a href={`${appBaseUrl}/register`} className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-emerald-100 px-4 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-50">
+                  Pilih Paket Signed + AAB
                 </a>
               </div>
+            </div>
+            <div className="mt-5 grid gap-3.5 md:grid-cols-3">
+              {[
+                { icon: Layers3, label: "Satuan kredit", value: "1 generate = 1.000 kredit" },
+                { icon: ShieldCheck, label: "Signed output", value: "Signing APK siap dengan keystore Anda" },
+                { icon: Sparkles, label: "Opsi AAB", value: "Alur AAB tersedia pada paket 2.000 kredit" },
+              ].map((meta) => (
+                <div key={meta.label} className="rounded-2xl border border-emerald-900/40 bg-slate-900/60 p-4">
+                  <div className="mb-3 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-900/50 text-emerald-300">
+                    <meta.icon className="h-4 w-4" aria-hidden="true" />
+                  </div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-emerald-300">{meta.label}</p>
+                  <p className="mt-2 text-sm text-slate-200">{meta.value}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        <section id="faq" className="py-24 px-6 bg-white/70 border-t border-emerald-100">
-          <div className="max-w-4xl mx-auto">
+        <section id="faq" className="border-t border-emerald-900/30 bg-slate-900/50 py-20">
+          <div className={containerClass}>
             <div className="text-center">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">FAQ</p>
-              <h2 className="text-3xl font-bold tracking-tight mt-4">Answers before you ship.</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">FAQ</p>
+              <h2 className="mt-4 text-2xl font-bold tracking-tight text-white">Pertanyaan umum sebelum rilis.</h2>
             </div>
-            <div className="mt-12 grid gap-4">
+            <div className="mt-10 grid gap-3.5">
               {[
                 {
-                  q: "Do I need to write any native code?",
-                  a: "No. Apeka.dev packages your website with a tested Android shell. You only manage your web app and branding assets.",
+                  q: "Apakah saya perlu menulis native code?",
+                  a: "Tidak. Apeka.dev mengemas website Anda dengan Android shell yang sudah teruji. Anda cukup mengelola web app dan aset branding.",
                 },
                 {
-                  q: "Can I publish to Google Play?",
-                  a: "Yes. We provide signed APKs and your keystore so you can upload and issue updates whenever you need.",
+                  q: "Apakah bisa publish ke Google Play?",
+                  a: "Bisa. Anda mendapatkan output signed APK dan opsi AAB untuk mendukung proses publikasi.",
                 },
                 {
-                  q: "How fast is the build pipeline?",
-                  a: "Most builds finish in under a minute once assets are verified. You can queue multiple releases at once.",
+                  q: "Seberapa cepat proses build?",
+                  a: "Durasi build tergantung aset proyek, namun alurnya dirancang agar iterasi QA tetap cepat.",
                 },
                 {
-                  q: "Do credits expire?",
-                  a: "Credits never expire. Use them when you need a new build or an update.",
+                  q: "Apakah kredit memiliki masa berlaku?",
+                  a: "Tidak. Kredit tidak kedaluwarsa dan bisa digunakan kapan saja saat Anda perlu build baru.",
                 },
               ].map((faq) => (
-                <details key={faq.q} className="group rounded-2xl border border-emerald-100 bg-white p-6">
-                  <summary className="flex cursor-pointer list-none items-center justify-between text-base font-semibold text-slate-900">
+                <details key={faq.q} className="group rounded-2xl border border-emerald-900/40 bg-slate-900/65 p-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-white">
                     {faq.q}
-                    <span className="ml-4 text-emerald-600">+</span>
+                    <span className="ml-4 text-emerald-300">+</span>
                   </summary>
-                  <p className="mt-4 text-sm text-slate-600 leading-relaxed">{faq.a}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{faq.a}</p>
                 </details>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="py-24 px-6">
-          <div className="max-w-5xl mx-auto bg-emerald-950 rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-emerald-500/20 blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 rounded-full bg-lime-400/20 blur-3xl"></div>
-            <div className="relative z-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-200">Ready to ship</p>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Bring your site to Android with Apeka.dev.</h2>
-              <p className="text-lg text-emerald-100/80 mb-10 max-w-2xl mx-auto">Launch faster, keep control of your brand, and deliver a native experience your users will trust.</p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="https://app.domain.com/register" className="inline-block bg-white text-emerald-900 px-8 py-4 rounded-full text-lg font-bold hover:bg-emerald-50 transition-colors shadow-xl">
-                  Register
+        <section className="py-20">
+          <div className={containerClass}>
+            <div className="rounded-[2rem] border border-emerald-800/60 bg-emerald-900/50 p-8 text-center md:p-12">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-200">Siap rilis</p>
+              <h2 className="mb-5 mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">Bawa website Anda ke Android bersama Apeka.dev.</h2>
+              <p className="mx-auto mb-8 max-w-2xl text-base text-emerald-100/90">Siapkan proses submission APK yang rapi untuk produk, tim, dan timeline launch Anda.</p>
+              <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <a href={`${appBaseUrl}/register`} className="inline-block rounded-full bg-emerald-100 px-7 py-3 text-base font-bold text-emerald-950 transition-colors hover:bg-emerald-50">
+                  Daftar
                 </a>
-                <a href="https://app.domain.com/login" className="inline-block border border-emerald-200 text-emerald-100 px-8 py-4 rounded-full text-lg font-semibold hover:bg-emerald-900/40 transition-colors">
-                  Log in
+                <a href={`${appBaseUrl}/login`} className="inline-block rounded-full border border-emerald-300/70 px-7 py-3 text-sm font-semibold text-emerald-100 transition-colors hover:bg-emerald-900/40">
+                  Masuk
                 </a>
               </div>
             </div>
@@ -555,26 +472,17 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-emerald-100 bg-white py-12 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <footer className="border-t border-emerald-900/40 bg-slate-950 py-10">
+        <div className={`${containerClass} flex flex-col items-center justify-between gap-5 md:flex-row`}>
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-emerald-600/10 border border-emerald-200 flex items-center justify-center" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Apeka logo">
-                <title>Apeka logo</title>
-                <path d="M4 14.5C6.2 7.5 11 4 18.5 4" stroke="#059669" strokeWidth="2" strokeLinecap="round"/>
-                <path d="M5 19.5C7.5 14.8 12 12 19 12" stroke="#0f766e" strokeWidth="2" strokeLinecap="round"/>
-                <circle cx="8" cy="9" r="2" fill="#10b981"/>
-              </svg>
-            </div>
-            <span className="font-bold text-slate-900 tracking-tight">Apeka.dev</span>
+            <ApekaLogo size={18} />
+            <span className="font-brand font-bold text-white">Apeka.dev</span>
           </div>
-          <div className="text-slate-500 text-sm">
-            © {new Date().getFullYear()} Apeka.dev. All rights reserved.
-          </div>
-          <div className="flex gap-6 text-sm font-medium text-slate-500">
-            <a href="/terms" className="hover:text-slate-900 transition-colors">Terms</a>
-            <a href="/privacy" className="hover:text-slate-900 transition-colors">Privacy</a>
-            <a href="/contact" className="hover:text-slate-900 transition-colors">Contact</a>
+          <div className="text-sm text-slate-400">© {new Date().getFullYear()} Apeka.dev. Hak cipta dilindungi.</div>
+          <div className="flex gap-6 text-sm text-slate-400">
+            <a href="/terms" className="font-brand transition-colors hover:text-white">Syarat</a>
+            <a href="/privacy" className="font-brand transition-colors hover:text-white">Privasi</a>
+            <a href="/contact" className="font-brand transition-colors hover:text-white">Kontak</a>
           </div>
         </div>
       </footer>
